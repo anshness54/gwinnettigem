@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the Gwinnett iGEM Team.">
+    <title>Gwinnett iGEM | The Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --ink: #111111; --paper: #f4f4f2; --red: #bc2635; --grid: rgba(0,0,0,0.04); }
+        * { box-sizing: border-box; } 
+        html { scroll-behavior: smooth; } 
+        body { 
+            margin: 0; 
+            background-color: var(--paper); 
+            background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center top;
+            color: var(--ink); 
+            font-family: "Space Grotesk", sans-serif; 
+            overflow-x: hidden; 
+        }
+        
+        .loader { position: fixed; inset: 0; z-index: 100; background: var(--paper); color: var(--ink); display: grid; place-items: center; align-content: center; gap: 20px; transition: opacity .7s, visibility .7s; }.loader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }.loader p { font: 11px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase; margin: 0; }.loader p span { color: var(--red); }.loader-logo { width: 248px; height: 188px; position: relative; display: grid; place-items: center; overflow: visible; }.loader-logo img { width: 100%; height: 100%; object-fit: contain; }.loader-ring { position: absolute; inset: -16px; border: 1px solid #b8b6b0; border-top-color: var(--red); border-radius: 50%; animation: spin 2.8s linear infinite; }.loader-ring:after { content: ''; position: absolute; width: 7px; height: 7px; background: var(--red); border-radius: 50%; right: 22px; top: 10px; }.loader-progress { width: 248px; height: 1px; background: #ccc9c1; overflow: hidden; }.loader-progress span { display: block; width: 35%; height: 100%; background: var(--red); animation: load 1.8s ease-in-out infinite; } @keyframes spin { to { transform: rotate(360deg); } } @keyframes load { 0% { transform: translateX(-100%); } 100% { transform: translateX(390%); } }
+        
+        /* HEADER */
+        .site-header { position: absolute; width: 100%; z-index: 15; padding: 25px 5vw; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); background: linear-gradient(to bottom, rgba(244,244,242,0.95), rgba(244,244,242,0)); }
+        .header-top { display: flex; justify-content: center; width: 100%; position: relative; }
+        .brand { display: flex; gap: 12px; align-items: center; color: var(--ink); text-decoration: none; font: 10px/1.05 "DM Mono", monospace; letter-spacing: .08em; }
+        .brand img { height: 45px; width: auto; mix-blend-mode: multiply; }
+        .brand b { font: 700 20px "Space Grotesk", sans-serif; letter-spacing: -.05em; }
+        
+        .nav { display: flex; gap: 35px; justify-content: center; margin-top: 20px; width: 100%; }
+        .nav a { text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500; position: relative; }
+        .nav a:after { content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: var(--red); transition: .3s; }
+        .nav a:hover:after, .nav a.active:after { width: 100%; }
+        .menu-toggle { display: none; }
+        
+        .section-pad { padding: 160px 10vw 100px; position: relative; z-index: 5; }
+        .section-kicker { font: 10px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .12em; color: #777; margin-bottom: 20px; display: inline-block; }
+        
+        /* TEAM SECTION */
+        .team-heading { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 70px; }
+        .team-heading h2 { font-size: clamp(40px, 6vw, 75px); line-height: 1; letter-spacing: -.05em; margin: 0; font-weight: 500; }
+        .team-heading h2 span { color: var(--red); }
+        .team-heading p { color: #555; font-size: 15px; line-height: 1.6; max-width: 450px; margin: 15px auto 0 auto; }
+        .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        
+        .member-card { border: 1px solid #d0ccc0; padding: 12px; background: #fff; transition: transform .3s, box-shadow .3s; }
+        .member-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.04); }
+        .member-photo { aspect-ratio: 3/4; position: relative; overflow: hidden; background: #eaeaea; margin-bottom: 15px; }
+        .member-photo:after { content: 'IMAGE_MISSING'; position: absolute; inset: 0; display: grid; place-items: center; font: 10px "DM Mono", monospace; color: #999; z-index: 1; }
+        .member-photo span { position: absolute; z-index: 10; top: 10px; left: 10px; background: var(--paper); color: var(--ink); padding: 4px 8px; font: 9px "DM Mono", monospace; }
+        .member-img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 5; display: block; filter: grayscale(20%) contrast(110%); }
+        
+        .member-info h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+        .member-info p { margin: 0; color: #666; font: 10px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .05em; }
+        
+        .team-note { text-align: center; font: 11px "DM Mono", monospace; color: #777; margin: 80px 0 0; padding-top: 40px; border-top: 1px dashed #d0ccc0; }
+        
+        footer { display: flex; justify-content: space-between; align-items: center; padding: 30px 5vw; background: #eaeaea; color: #666; font: 10px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .05em; border-top: 1px solid #d0ccc0; }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .loader-logo img { animation: logo-breathe 2.4s ease-in-out infinite; }
+        
+        @keyframes logo-breathe { 0%, 100% { transform: scale(.96); opacity: .82; } 50% { transform: scale(1); opacity: 1; } }
+        
+        @media (max-width: 900px) { 
+            .site-header { padding: 15px 5vw; flex-direction: column; }
+            .header-top { justify-content: space-between; align-items: center; }
+            .menu-toggle { display: flex !important; border: 0; background: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; }
+            .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--ink); transition: .3s; }
+            .nav { display: none; margin-top: 0; flex-direction: column; gap: 15px; align-items: center; position: absolute; top: 85px; left: 0; right: 0; background: var(--paper); padding: 20px; border-bottom: 1px solid #d0ccc0; z-index: 12; }
+            .nav.open { display: flex; }
+            .nav a { font-size: 12px; }
+            .section-pad { padding: 120px 6vw 80px; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            footer { flex-direction: column; gap: 15px; text-align: center; } 
+        }
+        @media (max-width: 500px) {
+            .team-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" aria-label="Loading Website" role="status">
+        <div class="loader-logo">
+            <span class="loader-ring"></span>
+            <img src="gigem-removebg-preview.png" alt="Gwinnett iGEM">
+        </div>
+        <p>Initializing<span> / </span>Lab Data</p>
+        <div class="loader-progress"><span></span></div>
+    </div>
+    
+    <header class="site-header">
+        <div class="header-top">
+            <a class="brand" href="index.html" aria-label="Home">
+                <img src="gigem-removebg-preview.png" alt="Logo">
+                <span>GWINNETT<br><b>iGEM</b></span>
+            </a>
+            <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+        </div>
+        <nav class="nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="index.html#about">Project Overview</a>
+            <a class="active" href="team.html">The Team</a>
+            <a href="index.html#apply" style="color: var(--red);">Apply Now</a>
+        </nav>
+    </header>
+
+    <main id="top">
+        <section class="section-pad">
+            <div class="team-heading reveal">
+                <div class="section-kicker">Personnel Roster</div>
+                <h2>The<br><span>Team</span></h2>
+                <p>Meet the cross-functional group of researchers, hardware engineers, and science communicators driving our project.</p>
+            </div>
+            <div class="team-grid">
+                <!-- MEMBER 1 -->
+                <article class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="_DSC7717.JPG" alt="Member Name" class="member-img">
+                        <span>INV-01</span>
+                    </div>
+                    <div class="member-info">
+                        <h3>Ethan Yang</h3>
+                        <p>Team Captain</p>
+                    </div>
+                </article>
+                <!-- MEMBER 2 -->
+                <article class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="_DSC7738.JPG" alt="Member Name" class="member-img">
+                        <span>INV-02</span>
+                    </div>
+                    <div class="member-info">
+                        <h3>Aryan Patel</h3>
+                        <p>Wiki & Design Lead</p>
+                    </div>
+                </article>
+                <!-- MEMBER 3 -->
+                <article class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="_DSC7681.JPG" alt="Member Name" class="member-img">
+                        <span>INV-03</span>
+                    </div>
+                    <div class="member-info">
+                        <h3>Ansh Itchhaporia</h3>
+                        <p>Dry Lab Lead / Software</p>
+                    </div>
+                </article>
+                <!-- MEMBER 4 -->
+                <article class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="_DSC7671.JPG" alt="Member Name" class="member-img">
+                        <span>INV-04</span>
+                    </div>
+                    <div class="member-info">
+                        <h3>Darshil Naik</h3>
+                        <p>Dry Lab Lead</p>
+                    </div>
+                </article>
+                <!-- MEMBER 5 -->
+                <article class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="_DSC7719.JPG" alt="Member Name" class="member-img">
+                        <span>INV-05</span>
+                    </div>
+                    <div class="member-info">
+                        <h3>Neelabh Das</h3>
+                        <p>Manager / Wiki & Design</p>
+                    </div>
+                </article>
+                <!-- MEMBER 6 -->
+                <article class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="_DSC7687.JPG" alt="Member Name" class="member-img">
+                        <span>INV-06</span>
+                    </div>
+                    <div class="member-info">
+                        <h3>Nikhil Srinivas</h3>
+                        <p>Wet Lab Lead</p>
+                    </div>
+                </article>
+                <!-- MEMBER 7 -->
+                <article class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="_DSC7703.JPG" alt="Member Name" class="member-img">
+                        <span>INV-07</span>
+                    </div>
+                    <div class="member-info">
+                        <h3>Tharun Shankar</h3>
+                        <p>Wiki & Design Lead</p>
+                    </div>
+                </article>
+                <!-- MEMBER 8 -->
+                <article class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://placehold.co/400x500/eeeeee/999999?text=Image+8" alt="Member Name" class="member-img">
+                        <span>INV-08</span>
+                    </div>
+                    <div class="member-info">
+                        <h3>Max Chandran</h3>
+                        <p>Software Lead</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <span>© <span id="year"></span> Gwinnett iGEM</span>
+        <span>Gwinnett County, GA</span>
+        <span><a href="https://www.instagram.com/gwinnettigem/" style="color:inherit; text-decoration:none;">Instagram &rarr;</a></span>
+    </footer>
+
+    <script>
+        const loader = document.querySelector('.loader');
+        window.addEventListener('load', () => setTimeout(() => loader.classList.add('loaded'), 600));
+        
+        const observer = new IntersectionObserver(entries => entries.forEach(entry => { 
+            if (entry.isIntersecting) entry.target.classList.add('is-visible'); 
+        }), { threshold: .1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        const toggle = document.querySelector('.menu-toggle'); 
+        const nav = document.querySelector('.nav');
+        toggle.addEventListener('click', () => { 
+            const open = nav.classList.toggle('open'); 
+            toggle.setAttribute('aria-expanded', open); 
+        });
+        document.querySelectorAll('.nav a').forEach(link => link.addEventListener('click', () => nav.classList.remove('open')));
+    </script>
+</body>
+</html>
