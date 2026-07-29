@@ -23,7 +23,26 @@
             overflow-x: hidden; 
         }
         
-        .loader { position: fixed; inset: 0; z-index: 100; background: var(--paper); color: var(--ink); display: grid; place-items: center; align-content: center; gap: 20px; transition: opacity .7s, visibility .7s; }.loader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }.loader p { font: 11px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase; margin: 0; }.loader p span { color: var(--red); }.loader-logo { width: 248px; height: 188px; position: relative; display: grid; place-items: center; overflow: visible; }.loader-logo img { width: 100%; height: 100%; object-fit: contain; }.loader-ring { position: absolute; inset: -16px; border: 1px solid #b8b6b0; border-top-color: var(--red); border-radius: 50%; animation: spin 2.8s linear infinite; }.loader-ring:after { content: ''; position: absolute; width: 7px; height: 7px; background: var(--red); border-radius: 50%; right: 22px; top: 10px; }.loader-progress { width: 248px; height: 1px; background: #ccc9c1; overflow: hidden; }.loader-progress span { display: block; width: 35%; height: 100%; background: var(--red); animation: load 1.8s ease-in-out infinite; } @keyframes spin { to { transform: rotate(360deg); } } @keyframes load { 0% { transform: translateX(-100%); } 100% { transform: translateX(390%); } }
+        .loader { position: fixed; inset: 0; z-index: 100; background: var(--paper); color: var(--ink); display: grid; place-items: center; align-content: center; gap: 20px; transition: opacity .7s, visibility .7s; }.loader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }.loader-logo { width: 360px; height: 360px; position: relative; display: grid; place-items: center; overflow: visible; }
+        .loader-logo img { width: 120px; height: 120px; object-fit: contain; position: relative; z-index: 1; }
+        
+        /* GEAR LOADER */
+        .loader-ring {
+            position: absolute;
+            inset: 0;
+            width: 360px;
+            height: 360px;
+            display: grid;
+            place-items: center;
+            animation: spin 2.8s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(188, 38, 53, 0.18));
+        }
+        .loader-ring svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .loader-progress { width: 320px; height: 1px; background: #ccc9c1; overflow: hidden; }.loader-progress span { display: block; width: 35%; height: 100%; background: var(--red); animation: load 1.8s ease-in-out infinite; } @keyframes spin { to { transform: rotate(360deg); } } @keyframes load { 0% { transform: translateX(-100%); } 100% { transform: translateX(390%); } }
         
         /* HEADER */
         .site-header { position: absolute; width: 100%; z-index: 15; padding: 25px 5vw; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); background: linear-gradient(to bottom, rgba(244,244,242,0.95), rgba(244,244,242,0)); }
@@ -69,6 +88,10 @@
         @keyframes logo-breathe { 0%, 100% { transform: scale(.96); opacity: .82; } 50% { transform: scale(1); opacity: 1; } }
         
         @media (max-width: 900px) { 
+            .loader-logo { width: 260px; height: 260px; }
+            .loader-ring { width: 260px; height: 260px; }
+            .loader-logo img { width: 86px; height: 86px; }
+            .loader-progress { width: 220px; }
             .site-header { padding: 15px 5vw; flex-direction: column; }
             .header-top { justify-content: space-between; align-items: center; }
             .menu-toggle { display: flex !important; border: 0; background: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; }
@@ -81,6 +104,10 @@
             footer { flex-direction: column; gap: 15px; text-align: center; } 
         }
         @media (max-width: 500px) {
+            .loader-logo { width: 200px; height: 200px; }
+            .loader-ring { width: 200px; height: 200px; }
+            .loader-logo img { width: 66px; height: 66px; }
+            .loader-progress { width: 170px; }
             .team-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -88,10 +115,14 @@
 <body>
     <div class="loader" aria-label="Loading Website" role="status">
         <div class="loader-logo">
-            <span class="loader-ring"></span>
+            <span class="loader-ring" aria-hidden="true">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill="var(--red)" stroke-linejoin="round" d="M 60.00 12.00 L 78.37 15.65 L 73.01 28.59 L 84.04 35.96 L 93.94 26.06 L 104.35 41.63 L 91.41 46.99 L 94.00 60.00 L 108.00 60.00 L 104.35 78.37 L 91.41 73.01 L 84.04 84.04 L 93.94 93.94 L 78.37 104.35 L 73.01 91.41 L 60.00 94.00 L 60.00 108.00 L 41.63 104.35 L 46.99 91.41 L 35.96 84.04 L 26.06 93.94 L 15.65 78.37 L 28.59 73.01 L 26.00 60.00 L 12.00 60.00 L 15.65 41.63 L 28.59 46.99 L 35.96 35.96 L 26.06 26.06 L 41.63 15.65 L 46.99 28.59 L 60.00 26.00 Z"/>
+                    <circle cx="60" cy="60" r="24" fill="var(--paper)"/>
+                </svg>
+            </span>
             <img src="gigem-removebg-preview.png" alt="Gwinnett iGEM">
         </div>
-        <p>Initializing<span> / </span>Lab Data</p>
         <div class="loader-progress"><span></span></div>
     </div>
     
@@ -119,7 +150,6 @@
                 <p>Meet the cross-functional group of researchers, hardware engineers, and science communicators driving our project.</p>
             </div>
             <div class="team-grid">
-                <!-- MEMBER 1 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="DSC7717.JPG" alt="Member Name" class="member-img">
@@ -130,7 +160,6 @@
                         <p>Team Captain</p>
                     </div>
                 </article>
-                <!-- MEMBER 2 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="DSC7738.JPG" alt="Member Name" class="member-img">
@@ -141,7 +170,6 @@
                         <p>Wiki & Design Lead</p>
                     </div>
                 </article>
-                <!-- MEMBER 3 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="DSC7681.JPG" alt="Member Name" class="member-img">
@@ -152,7 +180,6 @@
                         <p>Dry Lab Lead / Software</p>
                     </div>
                 </article>
-                <!-- MEMBER 4 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="DSC7671.JPG" alt="Member Name" class="member-img">
@@ -163,7 +190,6 @@
                         <p>Dry Lab Lead</p>
                     </div>
                 </article>
-                <!-- MEMBER 5 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="DSC7719.JPG" alt="Member Name" class="member-img">
@@ -174,7 +200,6 @@
                         <p>Manager / Wiki & Design</p>
                     </div>
                 </article>
-                <!-- MEMBER 6 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="DSC7687.JPG" alt="Member Name" class="member-img">
@@ -185,7 +210,6 @@
                         <p>Wet Lab Lead</p>
                     </div>
                 </article>
-                <!-- MEMBER 7 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="DSC7703.JPG" alt="Member Name" class="member-img">
@@ -196,7 +220,6 @@
                         <p>Wiki & Design Lead</p>
                     </div>
                 </article>
-                <!-- MEMBER 8 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="https://placehold.co/400x500/eeeeee/999999?text=Image+8" alt="Member Name" class="member-img">
@@ -207,7 +230,6 @@
                         <p>Software Lead</p>
                     </div>
                 </article>
-                <!-- MEMBER 9 -->
                 <article class="member-card reveal">
                     <div class="member-photo">
                         <img src="https://placehold.co/400x500/eeeeee/999999?text=Image+8" alt="Member Name" class="member-img">
