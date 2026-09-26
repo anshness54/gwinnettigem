@@ -57,16 +57,6 @@
         .nav a:hover:after, .nav a.active:after { width: 100%; }
         .menu-toggle { display: none; }
 
-        .parallax-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; will-change: transform; }
-        .science-node { position: absolute; border: 1px solid rgba(188, 38, 53, 0.2); border-radius: 50%; display: grid; place-items: center; will-change: transform, opacity; transition: opacity 0.1s ease-out; }
-        .science-node::before { content: ''; width: 4px; height: 4px; background: var(--red); border-radius: 50%; opacity: 0.5; }
-        .sn-1 { width: 140px; height: 140px; top: 15%; left: 5%; }
-        .sn-2 { width: 60px; height: 60px; top: 65%; left: 35%; border-color: rgba(0,0,0,0.1); }
-        .sn-2::before { background: var(--ink); }
-        .sn-3 { width: 280px; height: 280px; top: -10%; right: -5%; opacity: 0.5; }
-        .sn-4 { width: 90px; height: 90px; bottom: 20%; right: 15%; }
-        .sn-5 { width: 40px; height: 40px; top: 40%; right: 45%; border-style: dashed; }
-        
         /* CENTER ALIGNED HERO */
         .hero { min-height: 100vh; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 180px 10vw 80px; text-align: center; }
         .hero-copy { width: 100%; max-width: 800px; z-index: 5; position: relative; display: flex; flex-direction: column; align-items: center; }
@@ -82,6 +72,20 @@
         .hero-art { width: 100%; max-width: 500px; height: 350px; margin-top: 40px; position: relative; z-index: 2; display: grid; place-items: center; }
         .hero-logo { width: 100%; height: auto; mix-blend-mode: multiply; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.08)); will-change: transform; }
         
+        /* COLLABORATION GALLERY */
+        .collab-section { background: var(--paper); border-top: 1px solid #d0ccc0; text-align: center; }
+        .collab-section .section-kicker { color: #777; border-bottom: 1px solid #d0ccc0; padding-bottom: 15px; }
+        .collab-heading { display: flex; flex-direction: column; align-items: center; text-align: center; margin: 0 0 50px; }
+        .collab-heading h2 { font-size: clamp(40px, 6vw, 75px); line-height: 1; letter-spacing: -.05em; margin: 20px 0 0; font-weight: 500; }
+        .collab-heading h2 span { color: var(--red); }
+        .collab-heading p { color: #666; font-size: 15px; line-height: 1.7; max-width: 550px; margin: 20px auto 0; }
+        .collab-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 230px; gap: 24px; text-align: left; }
+        .collab-item { margin: 0; display: flex; flex-direction: column; }
+        .collab-item.wide { grid-column: span 2; }
+        .collab-item.large { grid-column: span 2; grid-row: span 2; }
+        .collab-photo { flex: 1; position: relative; overflow: hidden; background: #eaeaea; display: grid; place-items: center; }
+        .collab-photo img { position: absolute; left: 0; top: -10%; width: 100%; height: 120%; object-fit: cover; display: block; }
+
         .section-pad { padding: 120px 10vw; position: relative; z-index: 5; }
         .section-kicker { font: 10px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .12em; color: #777; margin-bottom: 20px; display: inline-block; }
         
@@ -120,7 +124,7 @@
         footer { display: flex; justify-content: space-between; align-items: center; padding: 30px 5vw; background: #eaeaea; color: #666; font: 10px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .05em; border-top: 1px solid #d0ccc0; }
         
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal.is-visible { opacity: 1; transform: none; }
         .loader-logo img { animation: logo-breathe 2.4s ease-in-out infinite; }
         
         @keyframes logo-breathe { 0%, 100% { transform: scale(.96); opacity: .82; } 50% { transform: scale(1); opacity: 1; } }
@@ -159,9 +163,8 @@
             .hero h1 { font-size: clamp(28px, 9vw, 60px); line-height: 1; }
             .hero-intro { font-size: 15px; }
             .tech-button { padding: 12px 24px; font-size: 10px; }
-            .parallax-container { display: none; }
-            .science-node { display: none; }
             .hero-art { max-width: 350px; height: 280px; margin-top: 30px; }
+            .collab-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; gap: 15px; }
             .section-pad { padding: 70px 5vw; }
             .section-kicker { font-size: 9px; margin-bottom: 15px; }
             .manifesto h2, .callout h2 { font-size: clamp(28px, 6vw, 50px); }
@@ -215,6 +218,8 @@
             .stat-row b { font-size: 24px; }
             .stat-row span { font-size: 8px; line-height: 1.4; }
             .callout { padding: 60px 4vw; }
+            .collab-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
+            .collab-item.wide, .collab-item.large { grid-column: span 1; grid-row: span 1; }
             .callout h2 { margin: 0 0 20px; font-size: clamp(20px, 6vw, 35px); }
             .callout p { font-size: 13px; margin: 0 auto 20px !important; line-height: 1.6; }
             .tech-button { padding: 10px 18px; font-size: 8px; gap: 10px; }
@@ -257,14 +262,6 @@
 
     <main id="top">
         <section class="hero">
-            <div class="parallax-container">
-                <div class="science-node sn-1 p-node" data-speed="0.2"></div>
-                <div class="science-node sn-2 p-node" data-speed="0.4"></div>
-                <div class="science-node sn-3 p-node" data-speed="0.1"></div>
-                <div class="science-node sn-4 p-node" data-speed="0.3"></div>
-                <div class="science-node sn-5 p-node" data-speed="0.5"></div>
-            </div>
-
             <div class="hero-copy reveal">
                 <h1>Gwinnett County's<br><em>Synthetic Biology Team</em></h1>
                 <p class="hero-intro">We are a student-led research collaborative focused on addressing real-world challenges through genetic engineering and synthetic biology.</p>
@@ -309,6 +306,32 @@
             </div>
         </section>
 
+        <section class="collab-section section-pad" id="collaboration">
+            <div class="section-kicker reveal">Lab Notebook</div>
+            <div class="collab-heading reveal">
+                <h2>Working<br><span>Together</span></h2>
+                <p>Snapshots from our meetings, lab sessions, and everything in between.</p>
+            </div>
+            <!-- Add photos by saving them next to this page as collab-01.jpg, collab-02.jpg, etc. (or change each src). Empty slots show a clean placeholder. -->
+            <div class="collab-grid">
+                <figure class="collab-item large reveal">
+                    <div class="collab-photo"><img src="DSC7820.jpeg" alt="Team Meeting" loading="lazy" decoding="async" onerror="this.remove()"></div>
+                </figure>
+                <figure class="collab-item reveal">
+                    <div class="collab-photo"><img src="DSC7800.jpeg" alt="Wet Lab" loading="lazy" decoding="async" onerror="this.remove()"></div>
+                </figure>
+                <figure class="collab-item reveal">
+                    <div class="collab-photo"><img src="DSC7805.jpeg" alt="Brainstorming" loading="lazy" decoding="async" onerror="this.remove()"></div>
+                </figure>
+                <figure class="collab-item reveal">
+                    <div class="collab-photo"><img src="DSC7795.jpeg" alt="Dry Lab" loading="lazy" decoding="async" onerror="this.remove()"></div>
+                </figure>
+                <figure class="collab-item reveal">
+                    <div class="collab-photo"><img src="DSC7818.jpeg" alt="Outreach" loading="lazy" decoding="async" onerror="this.remove()"></div>
+                </figure>
+            </div>
+        </section>
+
         <section class="callout section-pad" id="apply" style="background: var(--red); color: white;">
             <div class="reveal">
                 <h2 style="color: white;">Join Our<br><em style="color: white;">Team</em></h2>
@@ -350,18 +373,11 @@
         });
         document.querySelectorAll('.nav a').forEach(link => link.addEventListener('click', () => nav.classList.remove('open')));
         
-        const pNodes = document.querySelectorAll('.p-node');
         const mainLogo = document.getElementById('parallax-logo');
         const sections = document.querySelectorAll('.manifesto, .what-is-igem, .callout');
         
         window.addEventListener('scroll', () => { 
             const scrollY = window.scrollY;
-            
-            pNodes.forEach(node => {
-                const speed = node.getAttribute('data-speed');
-                node.style.transform = `translateY(${scrollY * speed}px) scale(${1 + scrollY * 0.0001})`;
-                node.style.opacity = Math.max(0.3, 1 - scrollY * 0.003);
-            });
             
             if(mainLogo) {
                 mainLogo.style.transform = `translateY(${scrollY * 0.08}px) rotate(${scrollY * 0.03}deg) scale(${1 + scrollY * 0.0002})`;
@@ -376,6 +392,21 @@
                 }
             });
         }, { passive: true });
+        const collabPhotos = document.querySelectorAll('.collab-photo');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        function moveCollab() {
+            if (reduceMotion) return;
+            collabPhotos.forEach(box => {
+                const img = box.querySelector('img');
+                if (!img) return;
+                const rect = box.getBoundingClientRect();
+                if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+                const progress = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
+                img.style.transform = `translate3d(0, ${Math.round(progress * -rect.height * 0.08)}px, 0)`;
+            });
+        }
+        window.addEventListener('scroll', moveCollab, { passive: true });
+        moveCollab();
     </script>
 </body>
 </html>
